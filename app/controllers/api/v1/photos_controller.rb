@@ -10,6 +10,8 @@ class Api::V1::PhotosController < ApplicationController
 
   # GET /photos/1
   def show
+    image = rails_blob_path(@photo.image_data)
+    # render json: {photo: @photo, image: image}
     render json: @photo
   end
 
@@ -47,5 +49,5 @@ class Api::V1::PhotosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def photo_params
       params.require(:photo).permit(:name, :image_data)
-    end
+      end
 end
