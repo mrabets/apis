@@ -46,6 +46,6 @@ class Api::V1::PhotosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def photo_params
-      params.require(:photo).permit(:name)
+      params.require(:photo).permit(:name, :image_data)
     end
 end
