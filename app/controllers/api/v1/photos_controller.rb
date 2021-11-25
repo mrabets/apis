@@ -18,7 +18,7 @@ class Api::V1::PhotosController < ApplicationController
     @photo = Photo.new(photo_params)
 
     if @photo.save
-      render json: @photo, status: :created, location: @photo
+      render json: @photo, status: :created, location: api_v1_photos_path(@photo)
     else
       render json: @photo.errors, status: :unprocessable_entity
     end
