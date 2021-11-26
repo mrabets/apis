@@ -1,3 +1,3 @@
 class Photo < ApplicationRecord
-  has_one_attached :image_data
+  has_one_attached :image
 end

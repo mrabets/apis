@@ -10,7 +10,7 @@ class Api::V1::PhotosController < ApplicationController
 
   # GET /photos/1
   def show
-    image = rails_blob_path(@photo.image_data)
+    image = rails_blob_path(@photo.image)
     # render json: {photo: @photo, image: image}
     render json: @photo
   end
@@ -29,8 +29,11 @@ class Api::V1::PhotosController < ApplicationController
   # PATCH/PUT /photos/1
   def update
     if @photo.update(photo_params)
+      # image_url = rails_blob_path(@photo.image)
+      # byebug
       render json: @photo
     else
+
       render json: @photo.errors, status: :unprocessable_entity
     end
   end
@@ -48,6 +51,6 @@ class Api::V1::PhotosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def photo_params
-      params.require(:photo).permit(:name, :image_data)
-      end
+      params.permit(:name, :image)
+    end
 end
