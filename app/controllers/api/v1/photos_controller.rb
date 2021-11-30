@@ -1,16 +1,17 @@
 class Api::V1::PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :update, :destroy]
+  before_action :authorized  
 
   # GET /photos
   def index
-    @photos = Photo.all
+    @photos = Photo.where(user: @user.id)
 
     render json: @photos
   end
 
   # GET /photos/1
   def show
-    image = rails_blob_path(@photo.image)
+    image = rails_blob_path @photo.image
     # render json: {photo: @photo, image: image}
     render json: @photo
   end
@@ -18,6 +19,7 @@ class Api::V1::PhotosController < ApplicationController
   # POST /photos
   def create
     @photo = Photo.new(photo_params)
+    @photo.user = @user 
 
     if @photo.save
       render json: @photo, status: :created, location: api_v1_photos_path(@photo)
@@ -51,6 +53,6 @@ class Api::V1::PhotosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def photo_params
-      params.permit(:name, :image)
+      params.permit(:name, :image, :user_id)
     end
 end
