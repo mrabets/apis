@@ -160,6 +160,8 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.2)
+    shoulda-matchers (5.0.0)
+      activesupport (>= 5.2.0)
     spring (3.1.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -192,6 +194,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 6.1.4, >= 6.1.4.1)
   rspec-rails
+  shoulda-matchers (~> 5.0)
   spring
   tzinfo-data
 
