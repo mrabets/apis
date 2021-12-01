@@ -1,13 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-  describe "POST /login" do
+  describe "POST /users" do
     scenario 'valid user attributes' do
-      build(:user)
-
-      post '/login', params: {
-        username: 'example',
-        password: 'example'
+      post '/users', params: {
+        username: 'example2',
+        password: 'example2'
       }
       
       expect(response.status).to eq(200)
@@ -19,7 +17,7 @@ RSpec.describe "Users", type: :request do
     end
 
     scenario 'invalid user attributes' do
-      post '/login', params: {
+      post '/users', params: {
         username: '',
         password: ''
       }
