@@ -7,7 +7,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :photos
+      resources :photos do
+        resources :likes, only: ['create']
+        delete '/likes', to: 'likes#destroy'
+      end
     end
   end
 end
