@@ -84,6 +84,7 @@ GEM
     ffi (1.15.4)
     globalid (0.6.0)
       activesupport (>= 5.0)
+    hiredis (0.6.3)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     jsonapi-renderer (0.2.2)
@@ -143,6 +144,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.5.1)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -187,12 +189,14 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   factory_bot_rails
+  hiredis
   jwt
   listen (~> 3.3)
   pg (~> 1.1)
   puma (~> 5.0)
   rack-cors
   rails (~> 6.1.4, >= 6.1.4.1)
+  redis
   rspec-rails
   shoulda-matchers (~> 5.0)
   spring
