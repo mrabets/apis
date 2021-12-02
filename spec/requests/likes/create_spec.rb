@@ -1,13 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe "Users", type: :request do
+RSpec.describe "Likes", type: :request do
+  
   before(:each) do
-    FactoryBot.create(:user)
+    @user = FactoryBot.create(:user)
+    @photo = FactoryBot.create(:photo)  
   end
 
-  describe "POST /login" do
-    scenario 'valid user attributes' do
-      
+  describe "POST /api/v1/photos/27/likes" do
+    it 'Should like photo' do
       post '/login', params: {
         username: 'example1',
         password: 'example1'
@@ -19,19 +20,14 @@ RSpec.describe "Users", type: :request do
 
       expect(json[:user]).to be_present
       expect(json[:token]).to be_present
-    end
 
-    scenario 'invalid user attributes' do
-      post '/login', params: {
-        username: '',
-        password: ''
-      }
+      token = json[:token] 
       
-      expect(response.status).to eq(200)
+      post "/api/v1/photos/#{@photo.id}/likes", nil, {'Authorization' => "bearer #{token}"}
 
       json = JSON.parse(response.body).deep_symbolize_keys
 
-      expect(json[:error]).to eq('Invalid username or password')
+      expect(json[:liked]).to eq("true")
     end
   end
 end
