@@ -6,7 +6,7 @@ module Likes
     end
 
     def create
-      @like = @photo.likes.create(user_id: @user.id, liked: true)     
+      @like = @photo.likes.create(user_id: @user.id, liked: true)
       Redis.new.set("#{@photo.id}---#{@user.id}", true)
       @like
     end

@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.2'
 
+gem 'rubocop'
+gem 'rubocop-rails'
+gem 'rubocop-performance'
 gem 'redis'
 gem 'hiredis'
 gem 'jwt'

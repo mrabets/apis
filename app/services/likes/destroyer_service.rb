@@ -6,7 +6,7 @@ module Likes
       @user = user
     end
 
-    def destroy()
+    def destroy
       return false if @like.nil?
 
       @like.liked = false

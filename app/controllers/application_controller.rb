@@ -5,7 +5,6 @@ class ApplicationController < ActionController::API
     Auth::EncodeTokenService.new(payload: payload).call
   end
 
-
   def decoded_token
     Auth::DecodeTokenService.new(request: request).call
   end
