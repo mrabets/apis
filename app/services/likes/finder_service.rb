@@ -6,7 +6,7 @@ module Likes
     end
 
     def call
-      return @photo.likes.find_by(
+      return Like.find_by(
         user_id: @user.id, 
         photo_id: @photo.id
       )

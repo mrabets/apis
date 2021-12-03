@@ -7,7 +7,7 @@ module Likes
     end
 
     def destroy()
-      return false unless @like
+      return false if @like.nil?
 
       @like.liked = false
       @like.save

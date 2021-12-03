@@ -5,10 +5,10 @@ module Likes
       @user = user
     end
 
-    def create()
-      @like = @photo.likes.create(user_id: @user.id, liked: true)
-      
-      Redis.new.redis.set("#{@photo.id}---#{@user.id}", true)
+    def create
+      @like = @photo.likes.create(user_id: @user.id, liked: true)     
+      Redis.new.set("#{@photo.id}---#{@user.id}", true)
+      @like
     end
   end
 end
