@@ -9,7 +9,11 @@ module Auth
 
       token = auth_header.split[1]
       begin
-        JWT.decode(token, 'yourSecret', true, algorithm: 'HS256')
+        JWT.decode(
+          token,
+          Rails.application.credentials.dig(:development, :jwt_secret_key),
+          true, algorithm: 'HS256'
+        )
       rescue JWT::DecodeError
         nil
       end
