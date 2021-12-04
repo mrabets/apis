@@ -11,3 +11,4 @@ Style/FrozenStringLiteralComment:
 
 Style/Documentation:
   Enabled: false
+  
