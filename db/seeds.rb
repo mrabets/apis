@@ -6,10 +6,5 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-photo = Photo.create(name: "My First Photo")
 
-photo.image_data.attach(
-  io: File.open('./app/assets/images/my_image.png'),
-  filename: 'my_image.png',
-  content_type: 'application/png'
-)
+user = User.create(username: "admin", password: "admin")
