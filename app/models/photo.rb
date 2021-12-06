@@ -3,5 +3,5 @@ class Photo < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { in: 1..255 }
 end

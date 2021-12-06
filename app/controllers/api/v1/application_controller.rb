@@ -22,6 +22,7 @@ class Api::V1::ApplicationController < ActionController::API
   def authorized
     render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
   end
+  
   private
 
   def render_json_error(error)
