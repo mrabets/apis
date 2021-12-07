@@ -2,12 +2,11 @@ require 'rails_helper'
 require 'devise/jwt/test_helpers'
 
 describe Users::SessionsController do
+  let(:user) { create_user }
+  let(:login_url) { '/users/sign_in' }
+  let(:logout_url) { '/users/sign_out' }
 
-  let (:user) { create_user }
-  let (:login_url) { '/users/sign_in' }
-  let (:logout_url) { '/users/sign_out' }
-
-  context 'When logging in' do
+  context 'when logging in' do
     before do
       login_with_api(user)
     end
@@ -21,11 +20,11 @@ describe Users::SessionsController do
     end
 
     it 'returns exists id' do
-      expect(json['id']).to_not be_nil
+      expect(json['id']).not_to be_nil
     end
   end
 
-  context 'When password is missing' do
+  context 'when password is missing' do
     before do
       post login_url, params: {
         user: {
@@ -40,22 +39,21 @@ describe Users::SessionsController do
     end
 
     it 'returns the message' do
-      expect(json['error']).to eq("Invalid Email or password.")
+      expect(json['error']).to eq('Invalid Email or password.')
     end
   end
 
-  context 'When logging out' do
+  context 'when logging out' do
     before do
       headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
 
       auth_headers = Devise::JWT::TestHelpers.auth_headers(headers, user)
-      
-      delete logout_url, :headers => auth_headers
+
+      delete logout_url, headers: auth_headers
     end
 
     it 'returns 204' do
       expect(response.status).to eq(204)
     end
   end
-
 end
