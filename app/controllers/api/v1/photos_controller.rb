@@ -1,34 +1,38 @@
-class Api::V1::PhotosController < ApplicationController
-  before_action :authorized
-  before_action :find_photo, only: %i[show destroy]
+module Api
+  module V1
+    class PhotosController < ApplicationController
+      before_action :authorized
+      before_action :find_photo, only: %i[show destroy]
 
-  def index
-    photos = Photo.where(user: @user.id)
+      def index
+        photos = Photo.where(user: @user.id)
 
-    render json: photos
-  end
+        render json: photos
+      end
 
-  def show
-    render json: @photo
-  end
+      def show
+        render json: @photo
+      end
 
-  def create
-    photo = Photos::PusherService.new(params, @user).create
-    render json: photo, status: :created
-  end
+      def create
+        photo = Photos::PusherService.new(params, @user).create
+        render json: photo, status: :created
+      end
 
-  def update
-    photo = Photos::PusherService.new(params, @user).update
-    render json: photo, status: :created
-  end
+      def update
+        photo = Photos::PusherService.new(params, @user).update
+        render json: photo, status: :created
+      end
 
-  def destroy
-    @photo.destroy
-  end
+      def destroy
+        @photo.destroy
+      end
 
-  private
+      private
 
-  def find_photo
-    @photo = Photo.find(params[:id])
+      def find_photo
+        @photo = Photo.find(params[:id])
+      end
+    end
   end
 end
