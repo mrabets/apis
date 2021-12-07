@@ -1,37 +1,61 @@
 require 'rails_helper'
+require 'devise/jwt/test_helpers'
 
-RSpec.describe "Users", type: :request do
-  before(:each) do
-    FactoryBot.create(:user)
-  end
+describe Users::SessionsController do
 
-  describe "POST /login" do
-    scenario 'valid user attributes' do
-      
-      post '/login', params: {
-        username: 'example1',
-        password: 'example1'
-      }
-      
-      expect(response.status).to eq(200)
+  let (:user) { create_user }
+  let (:login_url) { '/users/sign_in' }
+  let (:logout_url) { '/users/sign_out' }
 
-      json = JSON.parse(response.body).deep_symbolize_keys
-
-      expect(json[:user]).to be_present
-      expect(json[:token]).to be_present
+  context 'When logging in' do
+    before do
+      login_with_api(user)
     end
 
-    scenario 'invalid user attributes' do
-      post '/login', params: {
-        username: '',
-        password: ''
-      }
-      
-      expect(response.status).to eq(200)
+    it 'returns a token' do
+      expect(response.headers['Authorization']).to be_present
+    end
 
-      json = JSON.parse(response.body).deep_symbolize_keys
+    it 'returns 201' do
+      expect(response.status).to eq(201)
+    end
 
-      expect(json[:error]).to eq('Invalid username or password')
+    it 'returns exists id' do
+      expect(json['id']).to_not be_nil
     end
   end
+
+  context 'When password is missing' do
+    before do
+      post login_url, params: {
+        user: {
+          email: user.email,
+          password: nil
+        }
+      }
+    end
+
+    it 'returns 401' do
+      expect(response.status).to eq(401)
+    end
+
+    it 'returns the message' do
+      expect(json['error']).to eq("Invalid Email or password.")
+    end
+  end
+
+  context 'When logging out' do
+    before do
+      headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
+
+      auth_headers = Devise::JWT::TestHelpers.auth_headers(headers, user)
+      
+      delete logout_url, :headers => auth_headers
+    end
+
+    it 'returns 204' do
+      expect(response.status).to eq(204)
+    end
+  end
+
 end
