@@ -1,6 +1,9 @@
 class User < ApplicationRecord
-  has_secure_password
-  has_many :photos, dependent: :destroy
-
-  validates :username, presence: true, uniqueness: true, length: { minimum: 3 }
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  
+  devise :database_authenticatable,
+         :jwt_authenticatable, 
+         :registerable, 
+         jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null
 end
