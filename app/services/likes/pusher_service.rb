@@ -23,6 +23,10 @@ module Likes
       redis.set(redis_key, false) if toggle_like(false)
     end
 
+    def already_like?
+      redis.get(redis_key) == 'true' || like.try(:liked?) || false
+    end
+
     private
 
     def toggle_like(liked)
@@ -30,17 +34,13 @@ module Likes
     end
 
     def like
-      @like ||= Like.find_by(user: user, photo: photo)
+      @like = Like.find_by(user: user, photo: photo)
     end
 
     def like_create
       photo.likes.create(user_id: user.id, liked: true)
       redis.set(redis_key, true)
-    end
-
-    def already_like?
-      redis.get(redis_key) == 'true' || like.try(:liked?)
-    end
+    end 
 
     def photo
       @photo ||= Photo.find(photo_id)
