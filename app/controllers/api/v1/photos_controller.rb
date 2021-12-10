@@ -1,11 +1,11 @@
 module Api
   module V1
     class PhotosController < ApplicationController
-      before_action :authorized
+      before_action :authenticate_user!
       before_action :find_photo, only: %i[show destroy]
 
       def index
-        photos = Photo.where(user: @user.id)
+        photos = Photo.where(user: current_user.id)
 
         render json: photos
       end
@@ -15,12 +15,12 @@ module Api
       end
 
       def create
-        photo = Photos::PusherService.new(params, @user).create
+        photo = Photos::PusherService.new(params, current_user).create
         render json: photo, status: :created
       end
 
       def update
-        photo = Photos::PusherService.new(params, @user).update
+        photo = Photos::PusherService.new(params, current_user).update
         render json: photo, status: :created
       end
 

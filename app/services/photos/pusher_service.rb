@@ -8,13 +8,11 @@ module Photos
     end
 
     def create
-      new_photo = Photo.new(name: params[:name])
-
-      new_photo.user = user
+      new_photo = user.photos.new(name: params[:name], image: params[:image])
 
       raise StandardError, new_photo.errors.inspect unless new_photo.save
 
-      photo
+      new_photo
     end
 
     def update
@@ -23,7 +21,7 @@ module Photos
       photo
     end
 
-    private
+    private    
 
     def photo
       @photo = Photo.find(params[:id])

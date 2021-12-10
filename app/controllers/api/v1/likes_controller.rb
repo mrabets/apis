@@ -1,7 +1,7 @@
 module Api
   module V1
     class LikesController < ApplicationController
-      before_action :authorized
+      before_action :authenticate_user!
 
       def destroy
         Likes::PusherService.new(params[:photo_id], @user).destroy
