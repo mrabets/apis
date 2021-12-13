@@ -1,3 +1,5 @@
+require 'devise/jwt/test_helpers'
+
 module ApiHelpers
   def json
     JSON.parse(response.body)

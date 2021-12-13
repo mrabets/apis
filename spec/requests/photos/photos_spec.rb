@@ -1,8 +1,6 @@
 require 'rails_helper'
-require 'devise/jwt/test_helpers'
 
 RSpec.describe 'Photos', type: :request do
-  let(:photo) { build_photo }
   let(:user) { create_user }
   let(:headers) { auth_headers(user) }
 
