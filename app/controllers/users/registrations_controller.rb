@@ -5,11 +5,9 @@ module Users
     private
 
     def respond_with(_resource, _opts = {})
-      if current_user
-        render json: { user: current_user, token: current_token }, status: :ok
-      else
-        render json: { error: @user.errors.full_messages }, status: 422
-      end
+      Users::CheckerService.call(@user)
+      
+      render json: { user: current_user, token: current_token }, status: :ok
     end
 
     def current_token
