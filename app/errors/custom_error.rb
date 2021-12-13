@@ -1,4 +1,4 @@
-class AuthenticationError < StandardError
+class CustomError < StandardError
   attr_reader :status
 
   def initialize(status)    

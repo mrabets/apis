@@ -8,7 +8,7 @@ module Likes
     def create
       like_create if like.nil?
 
-      raise StandardError, 'Like already liked' if already_like?
+      raise CustomError.new(422), 'Like already liked' if already_like?
 
       redis.set(redis_key, true) if toggle_like(true)
 
@@ -16,7 +16,7 @@ module Likes
     end
 
     def destroy
-      raise StandardError, 'Like already unliked' unless already_like?
+      raise CustomError.new(422), 'Like already unliked' unless already_like?
 
       redis.set(redis_key, false) if toggle_like(false)
     end
