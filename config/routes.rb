@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         resources :likes, only: ['create']
         delete '/likes', to: 'likes#destroy'
         get 'like_status', to: 'likes#status'
+        get 'like_count', to: 'likes#count'
       end
 
       get '/member-data', to: 'members#show'

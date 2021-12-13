@@ -1,7 +1,5 @@
 module Likes
   class PusherService
-    attr_reader :photo_id, :user
-
     def initialize(photo_id, user)
       @photo_id = photo_id
       @user = user
@@ -28,6 +26,8 @@ module Likes
     end
 
     private
+
+    attr_reader :photo_id, :user
 
     def toggle_like(liked)
       Like.where(user: user, photo: photo, liked: !liked).update_all(liked: liked)

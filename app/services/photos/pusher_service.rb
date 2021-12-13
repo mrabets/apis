@@ -1,7 +1,5 @@
 module Photos
   class PusherService
-    attr_reader :params, :user
-
     def initialize(params, user)
       @params = params
       @user = user
@@ -22,6 +20,8 @@ module Photos
     end
 
     private    
+
+    attr_reader :params, :user
 
     def photo
       @photo = Photo.find(params[:id])
