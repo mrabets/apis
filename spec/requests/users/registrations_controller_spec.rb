@@ -15,12 +15,12 @@ describe Users::RegistrationsController, type: :request do
       }
     end
 
-    it 'returns 201' do
-      expect(response.status).to eq(201)
+    it 'returns 200' do
+      expect(response.status).to eq(200)
     end
 
     it 'returns exists id' do
-      expect(json['id']).not_to be_nil
+      expect(json['user']).not_to be_nil
     end
   end
 
