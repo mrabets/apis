@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :photos do
-        resources :likes, only: ['create']
+        resources :likes, only: ['create', 'destroy']
         delete '/likes', to: 'likes#destroy'
         get 'like_status', to: 'likes#status'
         get 'like_count', to: 'likes#count'
