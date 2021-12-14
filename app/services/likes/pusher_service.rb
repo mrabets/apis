@@ -6,9 +6,11 @@ module Likes
     end
 
     def create
-      like_create if like.nil?
-
-      raise CustomError.new(422), 'Like already liked' if already_like?
+       if like.nil?
+        like_create
+       else
+        raise CustomError.new(422), 'Like already liked' if already_like?
+       end
 
       redis.set(redis_key, true) if toggle_like(true)
 
