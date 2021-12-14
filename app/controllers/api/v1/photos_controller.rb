@@ -5,7 +5,7 @@ module Api
       before_action :find_photo, only: %i[show destroy]
 
       def index
-        photos = Photo.where(user: current_user.id)
+        photos = Photo.all
 
         render json: photos
       end
