@@ -5,7 +5,6 @@ module Api
 
       def index
         photos = Photo.all.order(:updated_at)
-
         render json: photos
       end
 
