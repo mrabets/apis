@@ -19,7 +19,7 @@ module Api
       end
 
       def count
-        like_count = Photo.find(params[:photo_id]).likes.select{|like| like.liked}.count
+        like_count = Photo.joins(:likes).where('photos.id = ? AND likes.liked = ?', params[:photo_id], true).count
         render json: { like_count: like_count }
       end
     end
