@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/postgres_data:/var/lib/postgresql/data
+  redis:
+    image: 'redis:5.0.7'
+  web:
+    depends_on:
+      - 'db'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: /bin/bash -c "rm -f /tmp/server.pid && bundle exec rails server -b 0.0.0.0 -P /tmp/server.pid"
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app

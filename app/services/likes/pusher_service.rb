@@ -49,7 +49,7 @@ module Likes
     end
 
     def redis
-      @redis ||= Redis.new(host: Rails.application.credentials.dig(:development, :likes_redis_host))
+      @redis ||= Redis.new(host: ENV.fetch("REDIS_HOST"))
     end
 
     def redis_key
