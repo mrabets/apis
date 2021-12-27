@@ -19,7 +19,7 @@ module Api
       end
 
       def destroy
-        Photos::DestroyerService.call(params[:id])
+        Photos::DestroyerService.new(params[:id], current_user).destroy
         render json: { message: 'Photo deleted' }, status: :ok
       end
     end
