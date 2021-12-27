@@ -4,7 +4,7 @@ module Api
       before_action :authenticate_user!
 
       def index
-        photos = Photo.all.order(:updated_at)
+        photos = Photo.where(user_id: params[:user_id]).order(:updated_at)
         render json: photos
       end
 

@@ -6,13 +6,18 @@ module Likes
     end
 
     def create
-       if like.nil?
+      first_create = false
+
+      if like.nil?
         like_create
-       else
+        first_create = true
+      else
         raise CustomError.new(422), 'Like already liked' if already_like?
-       end
+      end
 
       redis.set(redis_key, true) if toggle_like(true)
+
+      toggle_like_count(true) unless first_create
 
       like
     end
@@ -21,6 +26,8 @@ module Likes
       raise CustomError.new(422), 'Like already unliked' unless already_like?
 
       redis.set(redis_key, false) if toggle_like(false)
+
+      toggle_like_count(false)
     end
 
     def already_like?
@@ -32,7 +39,13 @@ module Likes
     attr_reader :photo_id, :user
 
     def toggle_like(liked)
-      Like.where(user: user, photo: photo, liked: !liked).update_all(liked: liked)
+      Like.where(user: user, photo: photo, liked: !liked).update_all(
+        liked: liked
+      )
+    end
+
+    def toggle_like_count(liked)
+      liked ? photo.increment!(:likes_count) : photo.decrement!(:likes_count)
     end
 
     def like
