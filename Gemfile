@@ -6,11 +6,12 @@ ruby '3.0.3'
 gem 'active_model_serializers'
 gem 'devise'
 gem 'devise-jwt'
+gem 'dotenv-rails', groups: %i[development test]
 gem 'hiredis'
 gem 'jwt'
 gem 'redis'
 gem 'webpacker'
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'whenever'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
@@ -45,7 +46,6 @@ group :development, :test do
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
   gem 'shoulda-matchers', '~> 5.0'
-  gem 'whenever'
 end
 
 group :development do

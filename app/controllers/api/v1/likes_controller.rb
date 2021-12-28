@@ -17,11 +17,6 @@ module Api
         status = Likes::PusherService.new(params[:photo_id], current_user).already_like?
         render json: { status: status }
       end
-
-      def count
-        like_count = Photo.joins(:likes).where('photos.id = ? AND likes.liked = ?', params[:photo_id], true).count
-        render json: { like_count: like_count }
-      end
     end
   end
 end
