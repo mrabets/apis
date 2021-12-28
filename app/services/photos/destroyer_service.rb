@@ -8,7 +8,7 @@ module Photos
     def destroy
       raise CustomError.new(422), 'Photo not found' if photo.nil?
       raise CustomError.new(422), 'Cannot delete from this user' unless belongs_to_user?
-      
+
       Photo.destroy(photo_id)
     end
 

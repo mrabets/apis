@@ -19,7 +19,7 @@ module Photos
       photo
     end
 
-    private    
+    private
 
     attr_reader :params, :user
 
