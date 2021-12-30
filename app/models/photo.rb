@@ -1,5 +1,5 @@
 class Photo < ApplicationRecord
-  has_one_attached :image
+  has_one_attached :image, service: :google
   belongs_to :user
   has_many :likes, dependent: :destroy
 
