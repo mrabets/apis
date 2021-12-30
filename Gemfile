@@ -7,7 +7,6 @@ gem 'sidekiq'
 gem 'active_model_serializers'
 gem 'devise'
 gem 'devise-jwt'
-gem 'dotenv-rails', groups: %i[development test]
 gem 'hiredis'
 gem 'jwt'
 gem 'redis'
@@ -47,6 +46,7 @@ group :development, :test do
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
   gem 'shoulda-matchers', '~> 5.0'
+  gem 'dotenv-rails'
 end
 
 group :development do
