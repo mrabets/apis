@@ -10,7 +10,6 @@ gem 'devise-jwt'
 gem 'hiredis'
 gem 'jwt'
 gem 'redis'
-gem 'webpacker'
 gem 'whenever'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
