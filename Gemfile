@@ -11,6 +11,7 @@ gem 'hiredis'
 gem 'jwt'
 gem 'redis'
 gem 'whenever'
+gem "google-cloud-storage"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
