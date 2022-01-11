@@ -36,7 +36,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rack-cors'
 gem 'byebug', platforms: %i[mri mingw x64_mingw]
 group :development, :test do
-  
+  gem "ruby-debug-ide", require: false
+  gem "debase", require: false
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails'
