@@ -75,6 +75,7 @@ GEM
       activesupport
     chronic (0.10.2)
     concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
     crass (1.0.6)
     devise (4.8.0)
       bcrypt (~> 3.0)
@@ -225,6 +226,10 @@ GEM
     semantic_range (3.0.0)
     shoulda-matchers (5.0.0)
       activesupport (>= 5.2.0)
+    sidekiq (6.3.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     spring (3.1.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -283,6 +288,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   shoulda-matchers (~> 5.0)
+  sidekiq
   spring
   tzinfo-data
   webpacker

@@ -10,7 +10,7 @@ module PhotoHelpers
 
   def build_photo(user)
     FactoryBot.build(:photo,
-                      name: Faker::Lorem.word,
-                      user_id: user.id)
+                     name: Faker::Lorem.word,
+                     user_id: user.id)
   end
 end

@@ -8,7 +8,7 @@ module Api
 
         def respond_with(_resource, _opts = {})
           Users::CheckerService.call(@user)
-          
+
           render json: { user: current_user, token: current_token }, status: :ok
         end
 

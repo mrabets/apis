@@ -6,7 +6,6 @@ RSpec.describe 'Photos', type: :request do
   let(:headers) { auth_headers(user) }
 
   describe 'GET /api/v1/photos' do
-    
     before do
       get '/api/v1/photos', headers: headers
     end
@@ -16,16 +15,15 @@ RSpec.describe 'Photos', type: :request do
     end
 
     it 'returns status code 200' do
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
   end
 
-  describe 'POST /api/v1/photos' do  
+  describe 'POST /api/v1/photos' do
     context 'when the request is valid' do
-
       before do
-        post '/api/v1/photos', headers: headers, 
-                               params: { name: "Valid Photo Name" }.to_json
+        post '/api/v1/photos', headers: headers,
+                               params: { name: 'Valid Photo Name' }.to_json
       end
 
       it 'creates a photo' do
@@ -33,23 +31,23 @@ RSpec.describe 'Photos', type: :request do
       end
 
       it 'returns status code 201' do
-        expect(response).to have_http_status(201)
+        expect(response).to have_http_status(:created)
       end
     end
 
     context 'when the request is invalid' do
       before do
-        post '/api/v1/photos', headers: headers, 
-                               params: { name: "" }.to_json
+        post '/api/v1/photos', headers: headers,
+                               params: { name: '' }.to_json
       end
 
       it 'returns status code 422' do
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
 
       it 'returns a validation failure message' do
         expect(response.body)
-       .to include("is too short (minimum is 1 character)")
+          .to include('is too short (minimum is 1 character)')
       end
     end
 
@@ -58,14 +56,14 @@ RSpec.describe 'Photos', type: :request do
         before do
           delete "/api/v1/photos/#{photo.id}", headers: headers
         end
-    
+
         it 'returns status code 200' do
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
 
         it 'returns message' do
           expect(response.body)
-          .to include("Photo deleted")
+            .to include('Photo deleted')
         end
       end
 
@@ -73,16 +71,16 @@ RSpec.describe 'Photos', type: :request do
         before do
           delete '/api/v1/photos/1984', headers: headers
         end
-    
+
         it 'returns status code 422' do
-          expect(response).to have_http_status(422)
+          expect(response).to have_http_status(:unprocessable_entity)
         end
-    
+
         it 'returns message' do
           expect(response.body)
-          .to include("Photo not found")
+            .to include('Photo not found')
         end
       end
     end
   end
- end
+end

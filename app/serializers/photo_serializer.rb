@@ -1,7 +1,7 @@
 class PhotoSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :name, :updated_at, :user_id, :image
+  attributes :id, :name, :updated_at, :user_id, :likes_count, :image
 
   def updated_at
     object.updated_at.to_date
