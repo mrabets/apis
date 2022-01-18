@@ -16,7 +16,7 @@ Rails.application.routes.draw do
         get 'like_count', to: 'likes#count'
       end
 
-      get '/member-data', to: 'members#show'
+      get 'users', to: 'custom_users#index'
     end
   end
 end
