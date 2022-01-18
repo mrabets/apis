@@ -1,3 +1,5 @@
+require "bunny"
+
 module Likes
   class PusherService
     def initialize(photo_id, user)
