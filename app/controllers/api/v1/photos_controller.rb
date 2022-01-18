@@ -4,7 +4,7 @@ module Api
       before_action :authenticate_user!
 
       def index
-        Users::ProfileService.new('View', 'Belarus').send_stats
+        SendVisitsJob.perform_later('View', 'Belarus')
         @photos = Photo.where(user_id: params[:user_id]).order(:updated_at)
         render json: @photos
       end
