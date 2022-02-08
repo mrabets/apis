@@ -4,8 +4,9 @@ module Api
       before_action :authenticate_user!
 
       def index
-        photos = Photo.where(user_id: params[:user_id]).order(:updated_at)
-        render json: photos
+        SendVisitsJob.perform_later('View', 'Belarus')
+        @photos = Photo.where(user_id: params[:user_id]).order(:updated_at)
+        render json: @photos
       end
 
       def create

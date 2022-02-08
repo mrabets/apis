@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.3'
 
+gem "bunny", ">= 2.19.0"
 gem 'sidekiq'
 gem 'active_model_serializers'
 gem 'devise'
